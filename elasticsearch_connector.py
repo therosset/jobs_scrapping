@@ -27,26 +27,23 @@ class ElasticsearchConnector:
         return es_client
 
     @staticmethod
-    def __create_msg_batches(self, messages: list, batch_size: int) -> list:
-        message_batches = [messages[i * batch_size:(i + 1) * batch_size] for i in
-                           range((len(messages) + batch_size - 1) // batch_size)]
-        return message_batches
+    def __create_msg_batches(messages: list, batch_size: int) -> list:
+        return [messages[i * batch_size:(i + 1) * batch_size] for i in
+                range((len(messages) + batch_size - 1) // batch_size)]
 
-    def send_logs(self, message_list: list):
-        date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
-        resp = bulk(
-            client=self.es_client,
-            doc_type="_doc",
-            index=f"jobs-scrapped-{date}",
-            actions=message_list,
-            max_retries=INGEST_DATA_MAXIMUM_RETRIES,
-            raise_on_error=False,
-            chunk_size=CHUNK_SIZE,
-            initial_backoff=INGEST_DATA_INIT_BACKOFF,
-            max_backoff=INGEST_DATA_MAX_BACKOFF
-        )
-        print(f"Sending: {len(message_list)}, reponse: {resp}")
-        return resp
-
-
-
+    def send_logs(self, message_list: list, batch_size: int):
+        msg_batches = self.__create_msg_batches(message_list, batch_size)
+        for batch in msg_batches:
+            date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
+            resp = bulk(
+                client=self.es_client,
+                doc_type="_doc",
+                index=f"jobs-scrapped-{date}",
+                actions=batch,
+                max_retries=INGEST_DATA_MAXIMUM_RETRIES,
+                raise_on_error=False,
+                chunk_size=CHUNK_SIZE,
+                initial_backoff=INGEST_DATA_INIT_BACKOFF,
+                max_backoff=INGEST_DATA_MAX_BACKOFF
+            )
+            print(f"Sending: {len(message_list)}, reponse: {resp}")
