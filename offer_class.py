@@ -4,7 +4,7 @@ from collections import namedtuple
 
 class Offer(ApiConnector):
 
-    def get_offer(self, page=30) -> list:
+    def get_offer(self, page=1) -> list:
         entries = []
         data = [1]
         while len(data) != 0:
