@@ -31,7 +31,7 @@ class ApiConnector:
             try:
                 response = requests.get(url, headers={'accept': 'application/json'})
                 status_code = response.status_code
-                print(f" Retry number {tries}/{self.max_retries} Sending request to: {url}, response: {status_code}")
+                # print(f" Retry number {tries}/{self.max_retries} Sending request to: {url}, response: {status_code}")
                 if not self._handle_errors(status_code, tries):
                     return response
             except Exception as e:
