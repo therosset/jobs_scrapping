@@ -1,14 +1,14 @@
-response_dict = {400: 'błędny request',
-                 401: 'błędny klucz',
-                 403: 'brak dostępu',
-                 404: 'brak danych',
-                 405: 'zabroniona metoda',
-                 415: 'nieobsługiwany typ mediów',
-                 429: 'przekroczony limit requestów, próba ponownego połączenia za {time}s',
-                 500: 'server is down',
-                 502: 'błąd gatewaa',
-                 503: 'serwis niedostępny',
-                 504: 'przekroczony czas gatewaya'
+response_dict = {400: 'Bad request',
+                 401: 'Unauthorized',
+                 403: 'Forbidden',
+                 404: 'Data not found',
+                 405: 'Method not allowed',
+                 415: 'Unsupported media type',
+                 429: 'Rate limit exceeded, another try in {time}s',
+                 500: 'Internal server error',
+                 502: 'Bad gateway',
+                 503: 'Service unavailable',
+                 504: 'Gateway timeout'
                  }
 
 # sample_data = {
