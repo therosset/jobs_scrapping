@@ -16,17 +16,17 @@ class JobOffer:
         pass
 
     def __set_salary_details(self, offer_json: dict) -> dict:
-        """Extracts salary details, enriches them, reformats, calculates mean from max and min
+        """Extracts salary details, enriches them, reformat, calculates mean from max and min
         or adds max and min as mean if only mean present """
         pass
 
     def __set_location_details(self, offers_json: dict) -> dict:
-        """Extracts location details, enriches them , reformats names to be properly encoded (polish letters etc.)
+        """Extracts location details, enriches them , reformat names to be properly encoded (polish letters etc.)
         adds some more data like Latitude and Longitude """
         pass
 
     def __set_description(self, description_raw: str) -> str:
-        """Extracts description, parses it and makes it human readable with polish encoding, removes HTML tags etc."""
+        """Extracts description, parses it and makes it human-readable with polish encoding, removes HTML tags etc."""
         pass
 
     def serialize(self):
