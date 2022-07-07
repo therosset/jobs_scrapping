@@ -13,6 +13,8 @@ INGEST_DATA_INIT_BACKOFF = 2
 INGEST_DATA_MAX_BACKOFF = 30
 CHUNK_SIZE = 500
 
+GEO_LOCATIONS = "https://astronomia.zagan.pl/art/wspolrzedne.html"
+
 response_dict = {400: 'Bad request',
                  401: 'Unauthorized',
                  403: 'Forbidden',
@@ -25,3 +27,14 @@ response_dict = {400: 'Bad request',
                  503: 'Service unavailable',
                  504: 'Gateway timeout'
                  }
+TRANSLATE_DICT = {"¯": "Ż", "³": "ł", "æ": "ć", "¶": "ś", "±": "ą", "¦": "Ś", "ñ": "ń", "ê": "ę", "£": "Ł", "¿": "ż",
+                  "¼": "ź"}
+COORDINATES_TRANSLATE = {"°": ".", "E": "", "N": "", "'": ""}
+TRANSLATE_DICT_SPECIAL_SIGNS = {"&amp;": "&", "\u0119": "ę", "\\u014": "ł", "\u0105": "ą", "\u0107": "ć", "\u00f3": "ó","\/":"/"}
+TAGS_REMOVE = ["<pre>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>", "<b>", "</b>",
+               "<strong>", "</strong>", "<ul>", "</ul>","<\/strong>","<br \/>","<\/li>","<\/ul>","\xa0"]
+
+CITY_PATTERN = "(?<=)(.*?)(?=\d\d°\d\d'E)"
+ADDRESSES_PATTERN = "(?<='N\n)(.*?N)(?=\n)"
+LATITUDE_PATTERN = "(\d\d°\d\d'E)"
+LONGITUDE_PATTERN = "(\d\d°\d\d'N)"

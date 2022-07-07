@@ -1,5 +1,9 @@
+from .config import TRANSLATE_DICT_SPECIAL_SIGNS, TAGS_REMOVE
+
 
 class JobOffer:
+    from .utils import get_geo_location
+    locations = get_geo_location()
 
     def __init__(self, offer_json: dict):
         self.job_title: str = offer_json.get("title")
@@ -27,7 +31,10 @@ class JobOffer:
 
     def __set_description(self, description_raw: str) -> str:
         """Extracts description, parses it and makes it human-readable with polish encoding, removes HTML tags etc."""
-        pass
+        from .utils import translate
+        tags_removed = translate(description_raw, TAGS_REMOVE)
+        translated = translate(tags_removed.encode('utf-8', 'replace').decode(), TRANSLATE_DICT_SPECIAL_SIGNS)
+        return translated
 
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""
