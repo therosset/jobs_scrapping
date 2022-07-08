@@ -4,7 +4,8 @@ from elasticsearch import RequestsHttpConnection
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 
-from config import ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS, ELK_URL, INGEST_DATA_MAX_BACKOFF, \
+from migration_script.config import ELK_URL
+from .config import ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS, INGEST_DATA_MAX_BACKOFF, \
     INGEST_DATA_INIT_BACKOFF, CHUNK_SIZE, INGEST_DATA_MAXIMUM_RETRIES, ELK_PASSWORD, ELK_USERNAME, INDEX_DATE_FMT, \
     ELK_REMOTE_IP
 
@@ -46,4 +47,4 @@ class ElasticsearchConnector:
                 initial_backoff=INGEST_DATA_INIT_BACKOFF,
                 max_backoff=INGEST_DATA_MAX_BACKOFF
             )
-            print(f"Sending: {len(message_list)}, reponse: {resp}")
+            print(f"Sending: {len(message_list)}, response: {resp}")

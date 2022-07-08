@@ -1,8 +1,13 @@
+from .config import (TRANSLATE_DICT_SPECIAL_SIGNS, TAGS_REMOVE, CITIES_TRANSLATE)
+
 
 class JobOffer:
+    from .utils import get_geo_location
+    locations = get_geo_location()
 
     def __init__(self, offer_json: dict):
         self.job_title: str = offer_json.get("title")
+        self.seniority: str = offer_json.get("seniority")
         self.salary: dict = self.__set_salary_details(offer_json)
         self.company: dict = self.__set_company_details(offer_json)
         self.location: dict = self.__set_location_details(offer_json)
@@ -23,11 +28,22 @@ class JobOffer:
     def __set_location_details(self, offers_json: dict) -> dict:
         """Extracts location details, enriches them , reformat names to be properly encoded (polish letters etc.)
         adds some more data like Latitude and Longitude """
-        pass
+        from .utils import translate
+        try:
+            city_raw = offers_json["locations"][0].get("city")
+            city = translate(city_raw, CITIES_TRANSLATE)
+            loc_details = offers_json["locations"][0]
+            coordinates = self.locations.get(city)
+            return {"city": city, "loc_details": loc_details, "coordinates": coordinates}
+        except IndexError as e:
+            print(f"No location given for:{offers_json['locations']}: {e}")
 
     def __set_description(self, description_raw: str) -> str:
         """Extracts description, parses it and makes it human-readable with polish encoding, removes HTML tags etc."""
-        pass
+        from .utils import translate
+        tags_removed = translate(description_raw, TAGS_REMOVE)
+        translated = translate(tags_removed.encode('utf-8', 'replace').decode(), TRANSLATE_DICT_SPECIAL_SIGNS)
+        return translated
 
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""

@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 from requests import Response
 import requests
 from requests.exceptions import Timeout, TooManyRedirects, ReadTimeout, ConnectTimeout
-from config import response_dict
+from .config import response_dict
+
 
 load_dotenv()
 
