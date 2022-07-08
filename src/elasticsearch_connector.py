@@ -32,7 +32,7 @@ class ElasticsearchConnector:
         return [messages[i * batch_size:(i + 1) * batch_size] for i in
                 range((len(messages) + batch_size - 1) // batch_size)]
 
-    def send_logs(self, message_list: list, batch_size: int):
+    def send_messages(self, message_list: list, batch_size: int):
         msg_batches = self.__create_msg_batches(message_list, batch_size)
         for batch in msg_batches:
             date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)

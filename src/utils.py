@@ -33,7 +33,9 @@ def enrich_data(raw_offers: list) -> list:
     return transformed
 
 
-def translate(text: str, conversion: dict or list) -> str:
+def translate(text: str or None, conversion: dict or list) -> str:
+    if not text:
+        return text
     if isinstance(conversion, dict):
         for key, value in conversion.items():
             text = text.replace(key, value)
@@ -45,7 +47,6 @@ def translate(text: str, conversion: dict or list) -> str:
 
 
 def get_geo_location():
-    print("Starting locations")
     locations = {}
     response = requests.get(url=GEO_LOCATIONS)
     addresses = re.findall(pattern=ADDRESSES_PATTERN, string=response.text, flags=re.MULTILINE)

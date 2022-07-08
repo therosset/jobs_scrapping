@@ -34,7 +34,7 @@ CITIES_TRANSLATE = {"Варшава": "Warszawa", "Warsaw": "Warszawa", "Krakow"
                     "Gdansk": "Gdańsk"}
 TRANSLATE_DICT_SPECIAL_SIGNS = {"&amp;": "&", "\u0119": "ę", "\\u014": "ł", "\u0105": "ą", "\u0107": "ć", "\u00f3": "ó",
                                 "\/": "/"}
-TAGS_REMOVE = ["<pre>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>", "<b>", "</b>",
+TAGS_REMOVE = ["<pre>","</p>","<p>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>", "<b>", "</b>",
                "<strong>", "</strong>", "<div>", "</div>", "<ul>", "</ul>", "<\/strong>", "<br \/>", "<\/li>", "<\/ul>",
                "\xa0"]
 
