@@ -16,11 +16,28 @@ class JobOffer:
         self.job_description: str = self.__set_description(offer_json.get("description"))
         self.tech_tags: list = self.__find_tech_tags()
         self.job_simplified: str = self.__set_simplified_job_field()
+        self.created_at: str = offer_json.get("created_at")
+        self.deadline_at: str = offer_json.get("deadline_at")
 
     def __set_company_details(self, offer_json: dict) -> dict:
+        from .utils import translate
         """Extracts company details, enriches them, puts in proper format
         returns them in dict to be set under 'company' key """
-        pass
+        company = offer_json.get("firm")
+        if company:
+            description_no_tags = translate(offer_json.get("description"), TAGS_REMOVE)
+            description_translated = translate(description_no_tags, TRANSLATE_DICT_SPECIAL_SIGNS)
+            company_yt_link = translate(company.get("youtube_url"), TRANSLATE_DICT_SPECIAL_SIGNS)
+            company_url = translate(company.get("url"), TRANSLATE_DICT_SPECIAL_SIGNS)
+            city = company.get("city")
+            if city:
+                city_translated = translate(city, CITIES_TRANSLATE)
+                city_coordinates = self.locations.get(city_translated)
+            else:
+                city_translated = ""
+                city_coordinates = {}
+            return {"name": company.get("name"), "description": description_translated, "Youtube": company_yt_link,
+                    "url": company_url, "city": city_translated, "company_coordinates": city_coordinates}
 
     def __set_salary_details(self, offer_json: dict) -> dict:
         """Extracts salary details, enriches them, reformat, calculates mean from max and min
