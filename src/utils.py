@@ -50,9 +50,7 @@ def get_geo_location():
     print("Starting locations")
     locations = {}
     response = requests.get(url=GEO_LOCATIONS)
-    raw_text = translate(response.text, TAGS_REMOVE)
-
-    addresses = re.findall(pattern=ADDRESSES_PATTERN, string=raw_text, flags=re.MULTILINE)
+    addresses = re.findall(pattern=ADDRESSES_PATTERN, string=response.text, flags=re.MULTILINE)
     cities = [translate(address, TRANSLATE_DICT) for address in addresses]
     for city_raw in cities:
         city = re.search(pattern=CITY_PATTERN, string=city_raw, flags=re.MULTILINE).group().rstrip()

@@ -30,11 +30,24 @@ response_dict = {400: 'Bad request',
 TRANSLATE_DICT = {"¯": "Ż", "³": "ł", "æ": "ć", "¶": "ś", "±": "ą", "¦": "Ś", "ñ": "ń", "ê": "ę", "£": "Ł", "¿": "ż",
                   "¼": "ź"}
 COORDINATES_TRANSLATE = {"°": ".", "E": "", "N": "", "'": ""}
-TRANSLATE_DICT_SPECIAL_SIGNS = {"&amp;": "&", "\u0119": "ę", "\\u014": "ł", "\u0105": "ą", "\u0107": "ć", "\u00f3": "ó","\/":"/"}
+CITIES_TRANSLATE = {"Варшава": "Warszawa", "Warsaw": "Warszawa", "Krakow": "Kraków", "Wroclaw": "Wrocław",
+                    "Gdansk": "Gdańsk"}
+TRANSLATE_DICT_SPECIAL_SIGNS = {"&amp;": "&", "\u0119": "ę", "\\u014": "ł", "\u0105": "ą", "\u0107": "ć", "\u00f3": "ó",
+                                "\/": "/"}
 TAGS_REMOVE = ["<pre>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>", "<b>", "</b>",
-               "<strong>", "</strong>", "<ul>", "</ul>","<\/strong>","<br \/>","<\/li>","<\/ul>","\xa0"]
+               "<strong>", "</strong>", "<div>", "</div>", "<ul>", "</ul>", "<\/strong>", "<br \/>", "<\/li>", "<\/ul>",
+               "\xa0"]
 
 CITY_PATTERN = "(?<=)(.*?)(?=\d\d°\d\d'E)"
 ADDRESSES_PATTERN = "(?<='N\n)(.*?N)(?=\n)"
 LATITUDE_PATTERN = "(\d\d°\d\d'E)"
 LONGITUDE_PATTERN = "(\d\d°\d\d'N)"
+
+TECHNOLOGY_LIST = ["C", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
+                   "Flutter", "Ionic", "Cordova", "Javascript", "Ruby", "PHP", "Spring", "Elixir", "Perl", "MySQL",
+                   "MSSQL", "SQL", "SqlLite", "Mongo", "Cassandra", "Elasticsearch", "T-Sql", "ASP.NET", "Redis",
+                   "Neo4j", "React4j", "VueJs", "Angular", "Web Components", "AWS", "AZURE", "GCP", "Docker",
+                   "Kubernetes", "HTML", "CSS", "django", "flask", "fastapi", "Heroku", "jquery", "bootstrap", "MVC",
+                   "WebApi", "ROS", "hadoop", "spark", "kafka", "queue", "j2ee", "oracle", "powerbi", "tableu", "rmq",
+                   "Rabbitmq", "hibernate", "PostgreSQL", "Derby", "LDAP", "Tomcat", "JBoss", "selenium", "blockchain",
+                   "machine learning"]

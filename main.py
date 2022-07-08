@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 
-from src.utils import (get_all_offers, get_geo_location, enrich_data)
+from src.utils import (get_all_offers, enrich_data)
 
 load_dotenv()
 
