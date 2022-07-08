@@ -5,10 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-from private.jobs_scrapping.src.config import TAGS_REMOVE, TRANSLATE_DICT, GEO_LOCATIONS, ADDRESSES_PATTERN, \
-    CITY_PATTERN, LATITUDE_PATTERN, \
-    LONGITUDE_PATTERN, COORDINATES_TRANSLATE
+from .config import (TRANSLATE_DICT, GEO_LOCATIONS, ADDRESSES_PATTERN, \
+                                               CITY_PATTERN, LATITUDE_PATTERN, LONGITUDE_PATTERN, COORDINATES_TRANSLATE)
 
 from .api_connector import ApiConnector
 
@@ -60,3 +58,4 @@ def get_geo_location():
         geo_long = translate(geo_long_raw, COORDINATES_TRANSLATE)
         locations[city] = {"coordinates": {"geo_lat": geo_lat, "geo_long": geo_long}}
     return locations
+

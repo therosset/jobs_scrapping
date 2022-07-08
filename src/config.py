@@ -43,11 +43,15 @@ ADDRESSES_PATTERN = "(?<='N\n)(.*?N)(?=\n)"
 LATITUDE_PATTERN = "(\d\d°\d\d'E)"
 LONGITUDE_PATTERN = "(\d\d°\d\d'N)"
 
-TECHNOLOGY_LIST = ["C", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
+TECHNOLOGY_LIST = ["C ", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
                    "Flutter", "Ionic", "Cordova", "Javascript", "Ruby", "PHP", "Spring", "Elixir", "Perl", "MySQL",
                    "MSSQL", "SQL", "SqlLite", "Mongo", "Cassandra", "Elasticsearch", "T-Sql", "ASP.NET", "Redis",
                    "Neo4j", "React4j", "VueJs", "Angular", "Web Components", "AWS", "AZURE", "GCP", "Docker",
                    "Kubernetes", "HTML", "CSS", "django", "flask", "fastapi", "Heroku", "jquery", "bootstrap", "MVC",
-                   "WebApi", "ROS", "hadoop", "spark", "kafka", "queue", "j2ee", "oracle", "powerbi", "tableu", "rmq",
+                   "WebApi", "hadoop", "spark", "kafka", "queue", "j2ee", "oracle", "powerbi", "tableu", "rmq",
                    "Rabbitmq", "hibernate", "PostgreSQL", "Derby", "LDAP", "Tomcat", "JBoss", "selenium", "blockchain",
-                   "machine learning"]
+                   "machine learning", "Jenkins", "Git", "sre","Helm","Ansible","Terraform"]
+
+SIMPLIFIED_JOBS_DESC = ["frontend", "fron-end" "backend", "back-end", "admin", "devops", "dev-ops", "project", "team",
+                        "scrum", "data", "cloud", "ops", "developer", "engineer", "iot", "product owner", "manager",
+                        "director"]
