@@ -14,6 +14,8 @@ class JobOffer:
         self.is_remote: bool = offer_json.get("is_remote")
         self.remote_range: int = offer_json.get("remote_range")
         self.job_description: str = self.__set_description(offer_json.get("description"))
+        self.tech_tags: list = self.__find_tech_tags()
+        self.job_simplified: str = self.__set_simplified_job_field()
 
     def __set_company_details(self, offer_json: dict) -> dict:
         """Extracts company details, enriches them, puts in proper format
@@ -44,6 +46,22 @@ class JobOffer:
         tags_removed = translate(description_raw, TAGS_REMOVE)
         translated = translate(tags_removed.encode('utf-8', 'replace').decode(), TRANSLATE_DICT_SPECIAL_SIGNS)
         return translated
+
+    def __find_tech_tags(self) -> list:
+        from .config import TECHNOLOGY_LIST
+        tags = []
+        job_description = self.job_description.lower()
+        for tech in TECHNOLOGY_LIST:
+            if tech.lower() in job_description:
+                tags.append(tech.lower())
+        return tags
+
+    def __set_simplified_job_field(self) -> str:
+        from .config import SIMPLIFIED_JOBS_DESC
+        job_title = self.job_title.lower()
+        for job_tag in SIMPLIFIED_JOBS_DESC:
+            if job_tag in job_title:
+                return job_tag.strip("-")
 
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""
