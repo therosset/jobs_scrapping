@@ -40,7 +40,7 @@ def salary_details(offer_json: dict):
 
     if not [x for x in (min_salary, max_salary) if x is None]:
         is_gross = offer_json.get('is_gross')
-        rate = offer_json.get('rate') if max_salary > 3 else 'hourly'
+        rate = offer_json.get('rate') if max_salary > 1000 else 'hourly'
         currency: str = offer_json.get('currency')
         if rate == 'yearly':
             min_salary = int(min_salary / 12)
@@ -60,7 +60,7 @@ def salary_details(offer_json: dict):
                                 'average_salary': mean, 'employment': employment, 'is_gross': is_gross})
     elif max_salary is not None and min_salary is None:
         is_gross = offer_json.get('is_gross')
-        rate = offer_json.get('rate') if max_salary > 3 else 'hourly'
+        rate = offer_json.get('rate') if max_salary > 1000 else 'hourly'
         currency: str = offer_json.get('currency')
         if rate == 'yearly':
             max_salary = int(max_salary / 12)
@@ -75,7 +75,7 @@ def salary_details(offer_json: dict):
 
     elif min_salary is not None and max_salary is None:
         is_gross = offer_json.get('is_gross')
-        rate = offer_json.get('rate') if min_salary > 3 else 'hourly'
+        rate = offer_json.get('rate') if min_salary > 1000 else 'hourly'
         currency: str = offer_json.get('currency')
         if rate == 'yearly':
             min_salary = int(min_salary / 12)
