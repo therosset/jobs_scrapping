@@ -1,9 +1,13 @@
 from dotenv import load_dotenv
+from job_model import JobOffer
+from utils import get_all_offers, enrich_data
 
-from utils import get_all_offers
 
 load_dotenv()
 
 if __name__ == "__main__":
-    raw_offers = get_all_offers("prod")
-    print(raw_offers)
+    data = enrich_data(get_all_offers('prod'))
+    # raw_offers = get_all_offers("prod")
+    for i in data:
+        print(i.__dict__)
+

@@ -1,4 +1,3 @@
-
 class JobOffer:
 
     def __init__(self, offer_json: dict):
@@ -15,10 +14,13 @@ class JobOffer:
         returns them in dict to be set under 'company' key """
         pass
 
-    def __set_salary_details(self, offer_json: dict) -> dict:
-        """Extracts salary details, enriches them, reformat, calculates mean from max and min
-        or adds max and min as mean if only mean present """
-        pass
+    def __set_salary_details(self, offer_json: dict, ) -> dict:
+        """Extracts salary details, enriches them, reformat, calculates mean from max and minimum_salary
+        or adds max and minimum_salary as mean if only mean present """
+        from utils import salary_details
+        salary_details = salary_details(offer_json)
+
+        return salary_details
 
     def __set_location_details(self, offers_json: dict) -> dict:
         """Extracts location details, enriches them , reformat names to be properly encoded (polish letters etc.)
@@ -32,3 +34,5 @@ class JobOffer:
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""
         return self.__dict__
+
+
