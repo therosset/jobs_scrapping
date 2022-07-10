@@ -40,9 +40,13 @@ class JobOffer:
                     "url": company_url, "city": city_translated, "company_coordinates": city_coordinates}
 
     def __set_salary_details(self, offer_json: dict) -> dict:
-        """Extracts salary details, enriches them, reformat, calculates mean from max and min
-        or adds max and min as mean if only mean present """
-        pass
+        """Extracts salary details, enriches them, reformat, calculates mean from max and minimum_salary
+        or adds max and minimum_salary as mean if only mean present """
+        from .utils import salary_details
+        salary_details = salary_details(offer_json)
+
+        return salary_details
+
 
     def __set_location_details(self, offers_json: dict) -> dict:
         """Extracts location details, enriches them , reformat names to be properly encoded (polish letters etc.)

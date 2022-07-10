@@ -33,7 +33,7 @@ COORDINATES_TRANSLATE = {"°": ".", "E": "", "N": "", "'": ""}
 CITIES_TRANSLATE = {"Варшава": "Warszawa", "Warsaw": "Warszawa", "Krakow": "Kraków", "Wroclaw": "Wrocław",
                     "Gdansk": "Gdańsk"}
 TRANSLATE_DICT_SPECIAL_SIGNS = {"&amp;": "&", "\u0119": "ę", "\\u014": "ł", "\u0105": "ą", "\u0107": "ć", "\u00f3": "ó",
-                                "\/": "/"}
+                                "\/": "/", "%C3%B3":"ó"}
 TAGS_REMOVE = ["<pre>","</p>","<p>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>", "<b>", "</b>",
                "<strong>", "</strong>", "<div>", "</div>", "<ul>", "</ul>", "<\/strong>", "<br \/>", "<\/li>", "<\/ul>",
                "\xa0"]
@@ -43,7 +43,7 @@ ADDRESSES_PATTERN = "(?<='N\n)(.*?N)(?=\n)"
 LATITUDE_PATTERN = "(\d\d°\d\d'E)"
 LONGITUDE_PATTERN = "(\d\d°\d\d'N)"
 
-TECHNOLOGY_LIST = ["C ", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
+TECHNOLOGY_LIST = [" C ", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
                    "Flutter", "Ionic", "Cordova", "Javascript", "Ruby", "PHP", "Spring", "Elixir", "Perl", "MySQL",
                    "MSSQL", "SQL", "SqlLite", "Mongo", "Cassandra", "Elasticsearch", "T-Sql", "ASP.NET", "Redis",
                    "Neo4j", "React4j", "VueJs", "Angular", "Web Components", "AWS", "AZURE", "GCP", "Docker",

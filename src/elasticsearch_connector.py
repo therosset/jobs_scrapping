@@ -4,10 +4,9 @@ from elasticsearch import RequestsHttpConnection
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 
-from migration_script.config import ELK_URL
 from .config import ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS, INGEST_DATA_MAX_BACKOFF, \
     INGEST_DATA_INIT_BACKOFF, CHUNK_SIZE, INGEST_DATA_MAXIMUM_RETRIES, ELK_PASSWORD, ELK_USERNAME, INDEX_DATE_FMT, \
-    ELK_REMOTE_IP
+    ELK_REMOTE_IP, ELK_LOCAL_URL
 
 
 class ElasticsearchConnector:
@@ -16,7 +15,7 @@ class ElasticsearchConnector:
 
     def __setup_client(self, local: bool):
         es_client = Elasticsearch(
-            hosts=[{'host': ELK_URL if not local else ELK_REMOTE_IP, 'port': 9200}],
+            hosts=[{'host': ELK_REMOTE_IP if not local else ELK_LOCAL_URL, 'port': 9200}],
             http_auth=(ELK_USERNAME, ELK_PASSWORD),
             scheme='https',
             use_ssl=True,
