@@ -15,6 +15,9 @@ CHUNK_SIZE = 500
 
 GEO_LOCATIONS = "https://astronomia.zagan.pl/art/wspolrzedne.html"
 
+EMPLOYMENTS_DICT = {'b2b': 'B2B', 'employment': "Umowa o pracę", 'mandatory': 'Umowa o dzieło',
+                    'contract': 'Umowa o zlecenie'}
+
 response_dict = {400: 'Bad request',
                  401: 'Unauthorized',
                  403: 'Forbidden',
