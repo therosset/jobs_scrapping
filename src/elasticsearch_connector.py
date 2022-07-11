@@ -1,7 +1,8 @@
 import datetime
 
+
 from elasticsearch.helpers import bulk
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, exceptions
 
 from .config import ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS, INGEST_DATA_MAX_BACKOFF, \
     INGEST_DATA_INIT_BACKOFF, CHUNK_SIZE, INGEST_DATA_MAXIMUM_RETRIES, ELK_PASSWORD, ELK_USERNAME, INDEX_DATE_FMT, \
@@ -53,5 +54,8 @@ class ElasticsearchConnector:
     def send_separately(self, message_list: list, param: str):
         date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
         for message in message_list:
-            resp = self.es_client.index(index=f"jobs-scrapped-{date}", doc_type="_doc", body=message)
-            print(f"Sending: {message}, response: {resp}")
+            try:
+                resp = self.es_client.index(index=f"jobs-scrapped-{date}", doc_type="_doc", body=message)
+                print(f"Sending: {message}, response: {resp}")
+            except exceptions.RequestError as e:
+                print(f"Request Exception!: {e} for: {message}")
