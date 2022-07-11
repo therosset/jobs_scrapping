@@ -94,7 +94,7 @@ class JobOffer:
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""
         serialized = {}
-        for k, v in self.__dict__:
+        for k, v in self.__dict__.items():
             if v:
                 serialized[k] = v
         return serialized
