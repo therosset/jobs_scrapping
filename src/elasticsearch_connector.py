@@ -1,6 +1,5 @@
 import datetime
 
-from elasticsearch import RequestsHttpConnection
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 
