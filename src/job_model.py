@@ -2,8 +2,9 @@ from .config import (TRANSLATE_DICT_SPECIAL_SIGNS, TAGS_REMOVE, CITIES_TRANSLATE
 
 
 class JobOffer:
-    from .utils import get_geo_location
+    from .utils import get_geo_location, get_conversion_rates
     locations = get_geo_location()
+    conversion_rates = get_conversion_rates()
 
     def __init__(self, offer_json: dict):
         self.job_title: str = offer_json.get("title")
@@ -40,9 +41,19 @@ class JobOffer:
                     "url": company_url, "city": city_translated, "company_coordinates": city_coordinates}
 
     def __set_salary_details(self, offer_json: dict) -> dict:
-        """Extracts salary details, enriches them, reformat, calculates mean from max and min
-        or adds max and min as mean if only mean present """
-        pass
+        """Extracts salary details, enriches them, reformat, calculates mean from max and minimum_salary
+        or adds max and minimum_salary as mean if only mean present """
+        from .utils import get_salary, get_salary_rate, convert_employment, set_salary
+        salary_enriched = {}
+        employment_raw = offer_json.get('employment') if 'b2b' or 'B2B' not in self.job_description else 'b2b'
+        employment = convert_employment(employment_raw)
+        salary = get_salary(offer_json, self.conversion_rates)
+        if not salary:
+            return {'employment': employment}
+        else:
+            is_gross = offer_json.get('is_gross')
+            salary_enriched.update({'is_gross': is_gross})
+            return set_salary(offer_json, salary_enriched=salary_enriched, salary=salary, employment=employment)
 
     def __set_location_details(self, offers_json: dict) -> dict:
         """Extracts location details, enriches them , reformat names to be properly encoded (polish letters etc.)
@@ -71,6 +82,8 @@ class JobOffer:
         for tech in TECHNOLOGY_LIST:
             if tech.lower() in job_description:
                 tags.append(tech.lower())
+        if len(tags) == 0:
+            tags.append("Soft Skills")
         return tags
 
     def __set_simplified_job_field(self) -> str:
@@ -82,4 +95,8 @@ class JobOffer:
 
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""
-        return self.__dict__
+        serialized = {}
+        for k, v in self.__dict__.items():
+            if v:
+                serialized[k] = v
+        return serialized

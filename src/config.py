@@ -15,6 +15,9 @@ CHUNK_SIZE = 500
 
 GEO_LOCATIONS = "https://astronomia.zagan.pl/art/wspolrzedne.html"
 
+EMPLOYMENTS_DICT = {'b2b': 'B2B', 'employment': "Umowa o pracę", 'mandatory': 'Umowa o dzieło',
+                    'contract': 'Umowa o zlecenie'}
+
 response_dict = {400: 'Bad request',
                  401: 'Unauthorized',
                  403: 'Forbidden',
@@ -31,10 +34,11 @@ TRANSLATE_DICT = {"¯": "Ż", "³": "ł", "æ": "ć", "¶": "ś", "±": "ą", "�
                   "¼": "ź"}
 COORDINATES_TRANSLATE = {"°": ".", "E": "", "N": "", "'": ""}
 CITIES_TRANSLATE = {"Варшава": "Warszawa", "Warsaw": "Warszawa", "Krakow": "Kraków", "Wroclaw": "Wrocław",
-                    "Gdansk": "Gdańsk"}
+                    "Gdansk": "Gdańsk", "Вроцлав": "Wrocław", "Краков": "Kraków"}
 TRANSLATE_DICT_SPECIAL_SIGNS = {"&amp;": "&", "\u0119": "ę", "\\u014": "ł", "\u0105": "ą", "\u0107": "ć", "\u00f3": "ó",
-                                "\/": "/"}
-TAGS_REMOVE = ["<pre>","</p>","<p>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>", "<b>", "</b>",
+                                "\/": "/", "%C3%B3": "ó"}
+TAGS_REMOVE = ["<pre>", "</p>", "<p>", "</pre>", "<PRE>", "</PRE>", "<br />", "<br >", "\r", "\n", "<li>", "</li>",
+               "<b>", "</b>",
                "<strong>", "</strong>", "<div>", "</div>", "<ul>", "</ul>", "<\/strong>", "<br \/>", "<\/li>", "<\/ul>",
                "\xa0"]
 
@@ -43,14 +47,14 @@ ADDRESSES_PATTERN = "(?<='N\n)(.*?N)(?=\n)"
 LATITUDE_PATTERN = "(\d\d°\d\d'E)"
 LONGITUDE_PATTERN = "(\d\d°\d\d'N)"
 
-TECHNOLOGY_LIST = ["C ", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
+TECHNOLOGY_LIST = [" C ", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scala", "Objective-c", "Swift", "React",
                    "Flutter", "Ionic", "Cordova", "Javascript", "Ruby", "PHP", "Spring", "Elixir", "Perl", "MySQL",
                    "MSSQL", "SQL", "SqlLite", "Mongo", "Cassandra", "Elasticsearch", "T-Sql", "ASP.NET", "Redis",
                    "Neo4j", "React4j", "VueJs", "Angular", "Web Components", "AWS", "AZURE", "GCP", "Docker",
                    "Kubernetes", "HTML", "CSS", "django", "flask", "fastapi", "Heroku", "jquery", "bootstrap", "MVC",
                    "WebApi", "hadoop", "spark", "kafka", "queue", "j2ee", "oracle", "powerbi", "tableu", "rmq",
                    "Rabbitmq", "hibernate", "PostgreSQL", "Derby", "LDAP", "Tomcat", "JBoss", "selenium", "blockchain",
-                   "machine learning", "Jenkins", "Git", "sre","Helm","Ansible","Terraform"]
+                   "machine learning", "Jenkins", "Git", "sre", "Helm", "Ansible", "Terraform","Soft Skills"]
 
 SIMPLIFIED_JOBS_DESC = ["frontend", "fron-end" "backend", "back-end", "admin", "devops", "dev-ops", "project", "team",
                         "scrum", "data", "cloud", "ops", "developer", "engineer", "iot", "product owner", "manager",
