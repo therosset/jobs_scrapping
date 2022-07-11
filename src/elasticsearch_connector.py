@@ -17,10 +17,9 @@ class ElasticsearchConnector:
         es_client = Elasticsearch(
             hosts=[{'host': ELK_REMOTE_IP if not local else ELK_LOCAL_URL, 'port': 9200}],
             http_auth=(ELK_USERNAME, ELK_PASSWORD),
-            scheme='https',
-            use_ssl=True,
-            verify_certs=True,
-            connection_class=RequestsHttpConnection,
+            scheme='http',
+            use_ssl=False,
+            verify_certs=False,
             retry_on_timeout=True,
             timeout=ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS
         )
@@ -32,6 +31,7 @@ class ElasticsearchConnector:
                 range((len(messages) + batch_size - 1) // batch_size)]
 
     def send_messages(self, message_list: list, batch_size: int):
+        print(f"Sending messages: {len(message_list)}")
         msg_batches = self.__create_msg_batches(message_list, batch_size)
         for batch in msg_batches:
             date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
