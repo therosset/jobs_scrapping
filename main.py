@@ -7,8 +7,7 @@ from src.utils import (get_all_offers, enrich_data)
 es_client = ElasticsearchConnector(local=True)
 
 if __name__ == "__main__":
-    offers = get_all_offers(mode="prodd")
+    offers = get_all_offers(mode="prod")
     enriched_messages = enrich_data(offers)
-    print(enriched_messages)
     es_client.send_separately(message_list=enriched_messages)
 
