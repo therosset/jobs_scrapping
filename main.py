@@ -10,5 +10,5 @@ if __name__ == "__main__":
     offers = get_all_offers(mode="prodd")
     enriched_messages = enrich_data(offers)
     print(enriched_messages)
-    es_client.send_messages(message_list=enriched_messages, batch_size=500)
+    es_client.send_separately(message_list=enriched_messages)
 

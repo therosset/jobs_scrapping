@@ -51,7 +51,7 @@ class ElasticsearchConnector:
         #     max_backoff=INGEST_DATA_MAX_BACKOFF
         # )
 
-    def send_separately(self, message_list: list, param: str):
+    def send_separately(self, message_list: list):
         date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
         for message in message_list:
             try:
