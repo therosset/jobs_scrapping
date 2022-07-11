@@ -32,17 +32,21 @@ class ElasticsearchConnector:
     def send_messages(self, message_list: list, batch_size: int):
         print(f"Sending messages: {len(message_list)}")
         msg_batches = self.__create_msg_batches(message_list, batch_size)
+        date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
         for batch in msg_batches:
             date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
-            resp = bulk(
-                client=self.es_client,
-                doc_type="_doc",
-                index=f"jobs-scrapped-{date}",
-                actions=batch,
-                max_retries=INGEST_DATA_MAXIMUM_RETRIES,
-                raise_on_error=False,
-                chunk_size=CHUNK_SIZE,
-                initial_backoff=INGEST_DATA_INIT_BACKOFF,
-                max_backoff=INGEST_DATA_MAX_BACKOFF
-            )
-            print(f"Sending: {len(message_list)}, response: {resp}")
+        for message in message_list:
+            resp = self.es_client.index(index = f"jobs-scrapped-{date}", doc_type= "_doc", body= message)
+            print(f"Sending: {message}, response: {resp}")
+            # resp = bulk(
+            #     client=self.es_client,
+            #     doc_type="_doc",
+            #     index=f"jobs-scrapped-{date}",
+            #     actions=batch,
+            #     max_retries=INGEST_DATA_MAXIMUM_RETRIES,
+            #     raise_on_error=False,
+            #     chunk_size=CHUNK_SIZE,
+            #     initial_backoff=INGEST_DATA_INIT_BACKOFF,
+            #     max_backoff=INGEST_DATA_MAX_BACKOFF
+            # )
+                print(f"Sending: {message}, response: {resp}")
