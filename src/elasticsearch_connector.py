@@ -34,9 +34,7 @@ class ElasticsearchConnector:
         print(f"Sending messages: {len(message_list)}")
         msg_batches = self.__create_msg_batches(message_list, batch_size)
         date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
-
         for batch in msg_batches:
-            date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
             resp = bulk(
                 client=self.es_client,
                 doc_type="_doc",
