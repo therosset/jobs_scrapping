@@ -55,7 +55,6 @@ class JobOffer:
             salary_enriched.update({'is_gross': is_gross})
             return set_salary(offer_json, salary_enriched=salary_enriched, salary=salary, employment=employment)
 
-
     def __set_location_details(self, offers_json: dict) -> dict:
         """Extracts location details, enriches them , reformat names to be properly encoded (polish letters etc.)
         adds some more data like Latitude and Longitude """
@@ -94,4 +93,8 @@ class JobOffer:
 
     def serialize(self):
         """Returns object as python dict just in the same form it needs to be ingested into DB"""
-        return self.__dict__
+        serialized = {}
+        for k, v in self.__dict__:
+            if v:
+                serialized[k] = v
+        return serialized
