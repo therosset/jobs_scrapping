@@ -1,10 +1,11 @@
 import time
+from ssl import SSLCertVerificationError
 
 from dotenv import load_dotenv
 from requests import Response
 import requests
-from requests.exceptions import Timeout, TooManyRedirects, ReadTimeout, ConnectTimeout
-from config import response_dict
+from requests.exceptions import Timeout, TooManyRedirects, ReadTimeout, ConnectTimeout, SSLError
+from .config import response_dict
 
 load_dotenv()
 
@@ -59,7 +60,7 @@ class ApiConnector:
             return False
 
     def _handle_exceptions(self, e: Exception, retries) -> bool:
-        if e in (Timeout, TooManyRedirects, ReadTimeout, ConnectTimeout):
+        if e in (Timeout, TooManyRedirects, ReadTimeout, ConnectTimeout, SSLError, SSLCertVerificationError):
             print(f"Exception : {e}")
             print(f"Sleep :{self.sleep_sec + retries * self.back_of_factor}s")
             time.sleep(self.sleep_sec + retries * self.back_of_factor)

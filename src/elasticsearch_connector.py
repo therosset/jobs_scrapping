@@ -4,9 +4,9 @@ from elasticsearch import RequestsHttpConnection
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 
-from config import ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS, ELK_URL, INGEST_DATA_MAX_BACKOFF, \
+from .config import ELASTICSEARCH_MAX_TIMEOUT_IN_SECONDS, INGEST_DATA_MAX_BACKOFF, \
     INGEST_DATA_INIT_BACKOFF, CHUNK_SIZE, INGEST_DATA_MAXIMUM_RETRIES, ELK_PASSWORD, ELK_USERNAME, INDEX_DATE_FMT, \
-    ELK_REMOTE_IP
+    ELK_REMOTE_IP, ELK_LOCAL_URL
 
 
 class ElasticsearchConnector:
@@ -15,7 +15,7 @@ class ElasticsearchConnector:
 
     def __setup_client(self, local: bool):
         es_client = Elasticsearch(
-            hosts=[{'host': ELK_URL if not local else ELK_REMOTE_IP, 'port': 9200}],
+            hosts=[{'host': ELK_REMOTE_IP if not local else ELK_LOCAL_URL, 'port': 9200}],
             http_auth=(ELK_USERNAME, ELK_PASSWORD),
             scheme='https',
             use_ssl=True,
@@ -31,7 +31,7 @@ class ElasticsearchConnector:
         return [messages[i * batch_size:(i + 1) * batch_size] for i in
                 range((len(messages) + batch_size - 1) // batch_size)]
 
-    def send_logs(self, message_list: list, batch_size: int):
+    def send_messages(self, message_list: list, batch_size: int):
         msg_batches = self.__create_msg_batches(message_list, batch_size)
         for batch in msg_batches:
             date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
@@ -46,4 +46,4 @@ class ElasticsearchConnector:
                 initial_backoff=INGEST_DATA_INIT_BACKOFF,
                 max_backoff=INGEST_DATA_MAX_BACKOFF
             )
-            print(f"Sending: {len(message_list)}, reponse: {resp}")
+            print(f"Sending: {len(message_list)}, response: {resp}")

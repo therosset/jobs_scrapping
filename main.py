@@ -1,13 +1,13 @@
 from dotenv import load_dotenv
-from job_model import JobOffer
-from utils import get_all_offers, enrich_data
-
-
 load_dotenv()
 
+from src.elasticsearch_connector import ElasticsearchConnector
+from src.utils import (get_all_offers, enrich_data)
+
+es_client = ElasticsearchConnector(local=True)
+
 if __name__ == "__main__":
-    data = enrich_data(get_all_offers('prod'))
-    # raw_offers = get_all_offers("prod")
-    for i in data:
-        print(i.__dict__)
+    offers = get_all_offers(mode="prodd")
+    enriched_messages = enrich_data(offers)
+    es_client.send_messages(message_list=enriched_messages, batch_size=500)
 
