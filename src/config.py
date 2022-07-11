@@ -54,7 +54,7 @@ TECHNOLOGY_LIST = [" C ", "java", "python", "C++", "C#", ".Net", "Kotlin", "Scal
                    "Kubernetes", "HTML", "CSS", "django", "flask", "fastapi", "Heroku", "jquery", "bootstrap", "MVC",
                    "WebApi", "hadoop", "spark", "kafka", "queue", "j2ee", "oracle", "powerbi", "tableu", "rmq",
                    "Rabbitmq", "hibernate", "PostgreSQL", "Derby", "LDAP", "Tomcat", "JBoss", "selenium", "blockchain",
-                   "machine learning", "Jenkins", "Git", "sre", "Helm", "Ansible", "Terraform"]
+                   "machine learning", "Jenkins", "Git", "sre", "Helm", "Ansible", "Terraform","Soft Skills"]
 
 SIMPLIFIED_JOBS_DESC = ["frontend", "fron-end" "backend", "back-end", "admin", "devops", "dev-ops", "project", "team",
                         "scrum", "data", "cloud", "ops", "developer", "engineer", "iot", "product owner", "manager",

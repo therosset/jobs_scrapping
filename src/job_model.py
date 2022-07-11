@@ -82,6 +82,8 @@ class JobOffer:
         for tech in TECHNOLOGY_LIST:
             if tech.lower() in job_description:
                 tags.append(tech.lower())
+        if len(tags) == 0:
+            tags.append("Soft Skills")
         return tags
 
     def __set_simplified_job_field(self) -> str:

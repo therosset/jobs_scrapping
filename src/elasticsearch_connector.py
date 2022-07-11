@@ -49,3 +49,9 @@ class ElasticsearchConnector:
         #     initial_backoff=INGEST_DATA_INIT_BACKOFF,
         #     max_backoff=INGEST_DATA_MAX_BACKOFF
         # )
+
+    def send_separately(self, message_list: list, param: str):
+        date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
+        for message in message_list:
+            resp = self.es_client.index(index=f"jobs-scrapped-{date}", doc_type="_doc", body=message)
+            print(f"Sending: {message}, response: {resp}")
