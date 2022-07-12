@@ -58,7 +58,7 @@ def get_geo_location():
         geo_lat = translate(geo_lat_raw, COORDINATES_TRANSLATE)
         geo_long_raw = re.search(pattern=LONGITUDE_PATTERN, string=city_raw, flags=re.MULTILINE).group().rstrip()
         geo_long = translate(geo_long_raw, COORDINATES_TRANSLATE)
-        locations[city] = {"lon": geo_long, "lat": geo_lat,}
+        locations[city] = {"lat": geo_lat, "long": geo_long}
     return locations
 
 
