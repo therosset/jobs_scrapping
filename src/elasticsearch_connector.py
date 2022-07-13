@@ -52,7 +52,7 @@ class ElasticsearchConnector:
         date = datetime.datetime.strftime(datetime.datetime.now(), INDEX_DATE_FMT)
         for message in message_list:
             try:
-                resp = self.es_client.index(index=f"jobs-scrapped-{date}", doc_type="_doc", body=message)
+                resp = self.es_client.index(index=f"jobs-scrapped-y", doc_type="_doc", body=message)
                 print(f"Sending: {message}, response: {resp}")
             except exceptions.RequestError as e:
                 print(f"Request Exception!: {e} for: {message}")
